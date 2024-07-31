@@ -2,7 +2,7 @@
 
 ###### 27 July 2024
 
-# Arch Install [btrfs + encryption + zram + qtile]
+# Arch Install [btrfs + encryption + zram + timeshift + qtile]
 
 Good morning, good afternoon or good evening, whereever you are reading this from. These installation instructions form the foundation of the Arch system that I use on my own machine. While it's important to always consult the official Arch wiki install guide [here](https://wiki.archlinux.org/title/Installation_guide), sometimes you may find your preferences deviating from the the official guide, and so my intention here is to provide a walkthrough on setting up your own system with the following:
    - [btrfs](https://btrfs.readthedocs.io/en/latest/): A feature rich, copy-on-write filesystem for Linux.
