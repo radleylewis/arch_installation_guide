@@ -1,6 +1,7 @@
 📍Chiang Mai, Thailand
 
-#### YouTube Tutorial [here](https://www.youtube.com/watch?v=Qgg5oNDylG8)
+#### YouTube Tutorial 
+See the video tutorial [here](https://www.youtube.com/watch?v=Qgg5oNDylG8).
 
 ###### 27 July 2024
 
@@ -34,8 +35,8 @@ Here we will follow the Arch wiki:
 3. [optional] set the font size with `setfont ter-132b`.
 4. Verify the UEFI boot mode `cat /sys/firmware/efi/fw_platform_size`. This installation is written for a system with a 62-bit x64 UEFI. This isn't required, but if you are on a different boot mode, consult section 1.6 of the official guide.
 5. Connect to the internet:
-- I use the `iwctl` utility for this purpose; 
-- Confirm that your connection is active with `ping -c 2 archlinux.org`; and,
+- I use the `iwctl` utility for this purpose; and,
+- Confirm that your connection is active with `ping -c 2 archlinux.org`.
 6. [optional] Obtain your IP Address with `ip addr show`, and now you're ready to ssh into your target machine.
 7. Set the timezone:
 - `timedatectl list-timezones`;
@@ -45,17 +46,17 @@ Here we will follow the Arch wiki:
 - list your partitions with `lsblk`;
 - delete the existing partitions on the target disk [WARNING: your data will be lost]
 - create two partitions:
-> !NOTE: The official Arch Linux installation guide suggests implementing a swap partition and you are welcome to take this route. You could also create a swap subvolume within BTRFS, however, snapshots will be disabled where a volume has an active swapfile. In my case, I have opted instead of `zram` which works by compressing data in RAM, thereby stretching your RAM further.
+> !NOTE: The official Arch Linux installation guide suggests implementing a swap partition and you are welcome to take this route. You could also create a swap subvolume within BTRFS, however, snapshots will be disabled where a volume has an active swapfile. In my case, I have opted instead of `zram` which works by compressing data in RAM, thereby stretching your RAM further. zram is only active when your RAM is at capacity.  
 
 - **efi** = 300mb    
 - **main** = allocate all remaining space (or as otherwise fit for your specific case) noting that BTRFS doesn't require pre-defined partition sizes, but rather allocates dynamically through subvolumes which act in a similar fashion to partitions but don't require the physical division of the target disk.
     
-9. format your main partition:
-- setup encryption: `cryptsetup luksformat /dev/nvme0n1p3`
+9. format your main partition:  
+- setup encryption: `cryptsetup luksformat /dev/nvme0n1p3`  
 - open your encrypted partition: `cryptsetup luksOpen /dev/nvme0n1p3 main`
-- format your partition: `mkfs.btrfs /dev/mapper/main`
-- mount your main partition for installation: `mount /dev/mapper/main /mnt`
-- now we need into the `/mnt` directory with `cd /mnt`
+- format your partition: `mkfs.btrfs /dev/mapper/main`  
+- mount your main partition for installation: `mount /dev/mapper/main /mnt`  
+- now we need into the `/mnt` directory with `cd /mnt`  
 - create our subvolumes:
   **root**: `btrfs subvolume create @`
   **home**: `btrfs subvolume create @home`
@@ -88,7 +89,7 @@ We are now working within our Arch system on our device, but it's important to n
 4. set up a new user (replace `rad` with your preferred username):
 - create `useradd -m -g users -G wheel rad`; 
 - give your user a password with `passwd rad` (you will be prompted to enter a password); and,
-- add your user to the sudoers group: `echo "rad ALL=(ALL) ALL" >> /etc/sudoers.d/rad`
+- add your user to the sudoers group: `echo "rad ALL=(ALL) ALL" >> /etc/sudoers.d/rad`.
 5. set mirrorlist `sudo reflector -c Thailand -a 12 --sort rate --save /etc/pacman.d/mirrorlist` (once again you can substitute Thailand with the location relevant to you)  
 
 Next, we will install all of the packages we need for our system. Refer to the bottom of this guide for a short summary on each package being installed. It's imperative to always know what you are doing, and what you are installing!
@@ -143,7 +144,7 @@ Now for the moment of truth. Make sure you have followed these steps above caref
 
 When you boot up you will be presented with the grub bootloader menu, and then, once you have selected to boot into arch linux (or the timer has timed out and selected your default option) you will be prompted to enter your encryption password. Upon successful decryption, you will be presented with the lightdm greeter. Enter the password for the user you created earlier. 
 
-QTile out of the box is not appealing - to say the least -, we still have some work to do. Keep it up!
+QTile out of the box doesn't look great - to say the least -, we still have some work to do. Keep it up!
 
 1. install [paru](https://github.com/Morganamilo/paru):
 ```bash
@@ -163,7 +164,7 @@ sudo systemctl enable --now zramd.service
 paru -S auto-cpufreq
 sudo systemctl enable --now auto-cpufreq.service
 ```
-> !NOTE: you may also like to check out `tlp`, although for my use case `auto-cpufreq` works well.
+> !NOTE: you may also like to check out `tlp`, although for my use case `auto-cpufreq` works well enough.
 4. install [timeshift](https://github.com/linuxmint/timeshift):
 ```bash
 paru -S timeshift timeshift-autosnap
@@ -177,3 +178,5 @@ sudo grub-mkconfig -o /boot/grub/grub.cfg
 ```
 
 ## Next: Ricing QTile
+
+Stay tuned for a guide on fully customizing QTile. 
