@@ -1,5 +1,7 @@
 📍Chiang Mai, Thailand
 
+## YouTube Tutorial [here](https://www.youtube.com/watch?v=Qgg5oNDylG8)
+
 ###### 27 July 2024
 
 # Arch Install [btrfs + encryption + zram + timeshift + qtile]
