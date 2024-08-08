@@ -53,8 +53,8 @@ Here we will follow the Arch wiki:
 - **main** = allocate all remaining space (or as otherwise fit for your specific case) noting that BTRFS doesn't require pre-defined partition sizes, but rather allocates dynamically through subvolumes which act in a similar fashion to partitions but don't require the physical division of the target disk.
     
 9. format your main partition:  
-- setup encryption: `cryptsetup luksformat /dev/nvme0n1p3`  
-- open your encrypted partition: `cryptsetup luksOpen /dev/nvme0n1p3 main`
+- setup encryption: `cryptsetup luksformat /dev/nvme0n1p2`  
+- open your encrypted partition: `cryptsetup luksOpen /dev/nvme0n1p2 main`
 - format your partition: `mkfs.btrfs /dev/mapper/main`  
 - mount your main partition for installation: `mount /dev/mapper/main /mnt`  
 - now we need into the `/mnt` directory with `cd /mnt`  
