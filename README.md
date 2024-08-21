@@ -58,9 +58,10 @@ Here we will follow the Arch wiki:
 - format your partition: `mkfs.btrfs /dev/mapper/main`  
 - mount your main partition for installation: `mount /dev/mapper/main /mnt`  
 - now we need into the `/mnt` directory with `cd /mnt`  
-- create our subvolumes:
-  **root**: `btrfs subvolume create @`
+- create our subvolumes:  
+  **root**: `btrfs subvolume create @`  
   **home**: `btrfs subvolume create @home`
+  > !NOTE: you are welcome to create your own subvolume names, but make sure you know what you are doing, because these subvolumes will also be referenced later when taking snapshots with timeshift.  
 - go back to the original (root) directory with `cd`
 - unmount our mnt partition: `umount /mnt`
 - create our boot and home mounting points `mkdir /mnt/{boot,home}`
