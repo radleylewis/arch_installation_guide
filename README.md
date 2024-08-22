@@ -120,6 +120,7 @@ pacman -S man-db man-pages texinfo bluez bluez-utils pipewire alsa-utils pipewir
 10. edit the mkinitcpio file for encrypt:
 - `vim /etc/mkinitcpio.conf` and search for HOOKS;
 - add encrypt (before filesystems hook);
+- add `atkbd` to the MODULES (enables external keyboard at device decryption prompt);
 - add `btrfs` to the MODULES; and,
 - recreate the `mkinitcpio -p linux`
 11. setup grub for the bootloader so that the system can boot linux:
